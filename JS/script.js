@@ -24,37 +24,63 @@ function soundAlarm(){
 
 function updateValue(key, value){
 
-    if(value <0){
+    if(value < 0){
         value = 0;
         console.log("Positive Numbers Only");
     } 
 
     if(key == "seconds"){
-        if(value <10){
+        if(value < 10){
             value= "" + value;
+        }
+
+        if(value > 59){
+            value = 59;
         }
     }
 
     $("#" + key).html(value || 0);
     timerObj[key] = value;
 
+    console.log("min", timerObj.minutes);
+    console.log("Sec", timerObj.seconds);
+
 }
 
 //self calling function, we declare the function and we call it at the same time
 (function detectChanges(key){
-    console.log("Detect changes");
 
-    let input = "#" + key + "input";
+    let input = "#" + key + "-input";
     $(input).change(function(){ // We want to call update value
-        updateValue(key);
+        updateValue(key, $(input).val());
     });
 
     
-})();
+    $(input).keyup(function(){ // We want to call update value
+        updateValue(key, $(input).val());
+    });
+
+    return arguments.callee;
+    
+})("minutes")("seconds");
 
 
+function startTimer(){
+
+}
 
 
+function stopTimer(){
 
+}
 
+function pauseTimer(){
 
+}
+
+function buttonManager(...buttonsArrays){ //Rest operator: let pass in as many arguments as we want in a function
+
+    for(let i = 0; i < buttonsArrays.length; i++){
+        let button = "#"+ buttonsArray[i];
+    }
+}
