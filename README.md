@@ -1,2 +1,2 @@
 # Clockworks
-Simple timer done in JavaScript
+Simple timer done in JavaScript // Jquery
